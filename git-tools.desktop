@@ -1,0 +1,61 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=KonqPopupMenu/Plugin
+MimeType=inode/directory;application/octet-stream;
+Icon=com.github.ztefn.haguichi-disconnected
+Actions=0clone;1init;2config;3add;4status;5restore;6commit;7push;8pull;9branch;
+X-KDE-StartupNotify=false
+X-KDE-Submenu=Git Tools
+X-KDE-Priority=TopLevel
+
+[Desktop Action 0clone]
+Icon=keyframe-duplicate
+Exec=konsole --workdir %f --hold -e git clone $(kdialog --inputbox 'respoistory URL' --title "Clone Respository" --geometry 500x300 )
+Name=clone
+
+[Desktop Action 1init]
+Icon=builder-view-left-pane-symbolic
+Exec=konsole --workdir %f --hold -e git init ;
+Name=init
+
+[Desktop Action 2config]
+Icon=dialog-object-properties
+Exec=konsole --workdir %f --hold -e git config --list ;
+Name=config
+
+[Desktop Action 3add]
+Icon=bqm-add
+Exec=konsole -e "git add %F" ;
+Name=add
+
+[Desktop Action 4status]
+Icon=run-build-install
+Exec=konsole --workdir %f --hold -e git status ;
+Name=status
+
+[Desktop Action 5restore]
+Icon=kt-remove
+Exec=konsole -e  git restore --staged %F ;
+Name=restore
+
+[Desktop Action 6commit]
+Icon=add-files-to-archive-symbolic
+Exec=konsole --workdir %f --hold -e git commit -m "$(kdialog --textinputbox 'describe commit' --title "Commit Message" --geometry 500x300)"
+Name=commit
+
+[Desktop Action 7push]
+Icon=vcs-push
+Exec=konsole --workdir %f --hold -e git push -u origin $(kdialog --inputbox 'branch' --title "Push Remote Branch")
+Name=push
+
+[Desktop Action 8pull]
+Icon=vcs-pull
+Exec=konsole --workdir %f --hold -e git pull origin $(kdialog --inputbox 'branch' --title "Pull Remote Branch")
+Name=pull
+
+[Desktop Action 9branch]
+Icon=vcs-branch
+Exec=konsole --workdir %f --hold -e git checkout $(kdialog --inputbox 'branch' --title "Switch to Branch")
+Name=branch
+
+
