@@ -3,59 +3,79 @@ Type=Service
 ServiceTypes=KonqPopupMenu/Plugin
 MimeType=inode/directory;application/octet-stream;
 Icon=com.github.ztefn.haguichi-disconnected
-Actions=0clone;1init;2config;3add;4status;5restore;6commit;7push;8pull;9branch;
+Actions=_SEPARATOR_;0-clone;1-init;2-remote;3-branch;3A-branch;3B-branch;4-config;5-add;6-status;7-restore;8-commit;9-push;A-pull;B-branch;
 X-KDE-StartupNotify=false
 X-KDE-Submenu=Git Tools
-X-KDE-Priority=TopLevel
+X-KDE-Priority=1
 
-[Desktop Action 0clone]
+[Desktop Action 0-clone]
 Icon=keyframe-duplicate
 Exec=konsole --workdir %f --hold -e git clone $(kdialog --inputbox 'respoistory URL' --title "Clone Respository" --geometry 500x300 )
 Name=clone
 
-[Desktop Action 1init]
+[Desktop Action 1-init]
 Icon=builder-view-left-pane-symbolic
 Exec=konsole --workdir %f --hold -e git init ;
 Name=init
 
-[Desktop Action 2config]
+[Desktop Action 2-remote]
+Icon=repository
+Exec=konsole --workdir %f --hold -e git remote add origin $(kdialog --inputbox 'repository-URL' --title "Add Remote Repository" --geometry 500x300)
+Name=add remote
+
+[Desktop Action 3-branch]
+Icon=branch
+Exec=konsole --workdir %f --hold -e git branch
+Name=branch list
+
+[Desktop Action 3A-branch]
+Icon=vcs-branch
+Exec=konsole --workdir %f -e git branch -m $(kdialog --inputbox 'branch' --title "Create New Branch")
+Name=branch create
+
+[Desktop Action 3B-branch]
+Icon=vcs-diff
+Exec=konsole --workdir %f --hold -e git switch $(kdialog --inputbox 'branch' --title "Switch To Branch")
+Name=branch switch
+
+[Desktop Action 4-config]
 Icon=dialog-object-properties
 Exec=konsole --workdir %f --hold -e git config --list ;
 Name=config
 
-[Desktop Action 3add]
+[Desktop Action 5-add]
 Icon=bqm-add
 Exec=konsole -e "git add %F" ;
 Name=add
 
-[Desktop Action 4status]
+[Desktop Action 6-status]
 Icon=run-build-install
 Exec=konsole --workdir %f --hold -e git status ;
 Name=status
 
-[Desktop Action 5restore]
+[Desktop Action 7-restore]
 Icon=kt-remove
 Exec=konsole -e  git restore --staged %F ;
 Name=restore
 
-[Desktop Action 6commit]
+[Desktop Action 8-commit]
 Icon=add-files-to-archive-symbolic
 Exec=konsole --workdir %f --hold -e git commit -m "$(kdialog --textinputbox 'describe commit' --title "Commit Message" --geometry 500x300)"
 Name=commit
 
-[Desktop Action 7push]
+[Desktop Action 9-push]
 Icon=vcs-push
 Exec=konsole --workdir %f --hold -e git push -u origin $(kdialog --inputbox 'branch' --title "Push Remote Branch")
 Name=push
 
-[Desktop Action 8pull]
+[Desktop Action A-pull]
 Icon=vcs-pull
 Exec=konsole --workdir %f --hold -e git pull origin $(kdialog --inputbox 'branch' --title "Pull Remote Branch")
 Name=pull
 
-[Desktop Action 9branch]
-Icon=vcs-branch
-Exec=konsole --workdir %f --hold -e git checkout $(kdialog --inputbox 'branch' --title "Switch to Branch")
-Name=branch
+[Desktop Action B-branch]
+Icon=vcs-branch-delete
+Exec=konsole --workdir %f --hold -e git branch -d $(kdialog --inputbox 'branch' --title "Delete Local Branch")
+Name=branch delete
 
 
